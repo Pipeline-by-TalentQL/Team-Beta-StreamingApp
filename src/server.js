@@ -10,11 +10,11 @@ const port = process.env.PORT || 9001;
 const http = require("http");
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(cors({origin: process.env.WATCH_URL}));
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: process.env.WATCH_URL
+    origin: '*',
   },
 });
 io.sockets.on("error", e => console.log(e));
